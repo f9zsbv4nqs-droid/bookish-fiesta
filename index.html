@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Web Studio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --secondary: #22c55e;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray: #64748b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(120deg, var(--primary), #6366f1);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background: white;
+      color: var(--primary);
+      padding: 0.8rem 1.8rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+    }
+
+    .section-title p {
+      color: var(--gray);
+      margin-top: 0.5rem;
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    /* PRICING */
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 1rem 0;
+    }
+
+    /* CONTACT */
+    .contact form {
+      max-width: 600px;
+      margin: auto;
+      display: grid;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      padding: 0.8rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #cbd5f5;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #4338ca;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">WebStudio</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Build Stunning Websites Faster</h1>
+  <p>We craft modern, responsive websites using clean HTML, CSS, and JavaScript.</p>
+  <a href="#pricing" class="btn">Get Started</a>
+</section>
+
+<section id="features">
+  <div class="section-title">
+    <h2>Features</h2>
+    <p>Everything you need to launch quickly</p>
+  </div>
+
+  <div class="features">
+    <div class="card">
+      <h3>⚡ Fast Performance</h3>
+      <p>Optimized code with zero unnecessary dependencies.</p>
+    </div>
+    <div class="card">
+      <h3>📱 Responsive Design</h3>
+      <p>Looks perfect on desktop, tablet, and mobile.</p>
+    </div>
+    <div class="card">
+      <h3>🎨 Modern UI</h3>
+      <p>Clean layouts, smooth animations, and great UX.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-title">
+    <h2>Pricing</h2>
+    <p>Simple and transparent</p>
+  </div>
+
+  <div class="pricing">
+    <div class="card">
+      <h3>Starter</h3>
+      <div class="price">$19</div>
+      <p>Perfect for personal projects</p>
+    </div>
+    <div class="card">
+      <h3>Pro</h3>
+      <div class="price">$49</div>
+      <p>Best for businesses and startups</p>
+    </div>
+    <div class="card">
+      <h3>Enterprise</h3>
+      <div class="price">$99</div>
+      <p>Custom solutions and support</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="section-title">
+    <h2>Contact Us</h2>
+    <p>We’d love to hear from you</p>
+  </div>
+
+  <form onsubmit="handleSubmit(event)">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2025 WebStudio. All rights reserved.</p>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert("✅ Message sent successfully!");
+    e.target.reset();
+  }
+</script>
+
+</body>
+</html>

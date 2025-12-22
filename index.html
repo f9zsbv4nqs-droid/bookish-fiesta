@@ -1,305 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Modern Web Studio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiteForge Pro</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:#4f46e5;
+  --bg:#f8fafc;
+  --panel:#ffffff;
+  --text:#0f172a;
+  --border:#e5e7eb;
+}
 
-  <style>
-    :root {
-      --primary: #4f46e5;
-      --secondary: #22c55e;
-      --dark: #0f172a;
-      --light: #f8fafc;
-      --gray: #64748b;
-    }
+body.dark {
+  --bg:#0f172a;
+  --panel:#1e293b;
+  --text:#f8fafc;
+  --border:#334155;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-    }
+* {
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
 
-    body {
-      background: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-    }
+body {
+  margin:0;
+  display:flex;
+  height:100vh;
+  background:var(--bg);
+  color:var(--text);
+}
 
-    /* NAVBAR */
-    header {
-      position: sticky;
-      top: 0;
-      background: white;
-      border-bottom: 1px solid #e5e7eb;
-      z-index: 1000;
-    }
+/* PANELS */
+.sidebar,.editor {
+  width:260px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:1rem;
+  overflow:auto;
+}
 
-    .nav {
-      max-width: 1200px;
-      margin: auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.sidebar h2 {
+  color:var(--primary);
+}
 
-    .logo {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--primary);
-    }
+.sidebar button,.editor button {
+  width:100%;
+  padding:0.6rem;
+  margin-bottom:0.4rem;
+  border:none;
+  border-radius:6px;
+  background:var(--primary);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
 
-    nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      color: var(--gray);
-      font-weight: 500;
-    }
+.sidebar button:hover {opacity:0.9;}
 
-    nav a:hover {
-      color: var(--primary);
-    }
+.canvas {
+  flex:1;
+  padding:2rem;
+  overflow:auto;
+}
 
-    /* HERO */
-    .hero {
-      background: linear-gradient(120deg, var(--primary), #6366f1);
-      color: white;
-      padding: 5rem 2rem;
-      text-align: center;
-    }
+.website {
+  max-width:1000px;
+  margin:auto;
+  background:white;
+  color:black;
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+}
 
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
+/* BLOCKS */
+.block {
+  padding:3rem 2rem;
+  border:2px dashed transparent;
+  cursor:move;
+}
 
-    .hero p {
-      max-width: 600px;
-      margin: auto;
-      font-size: 1.1rem;
-      opacity: 0.95;
-    }
+.block.selected {
+  border-color:var(--primary);
+}
 
-    .btn {
-      display: inline-block;
-      margin-top: 2rem;
-      background: white;
-      color: var(--primary);
-      padding: 0.8rem 1.8rem;
-      border-radius: 999px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+.hero {
+  background:linear-gradient(120deg,#4f46e5,#6366f1);
+  color:white;
+  text-align:center;
+}
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
+.button a {
+  display:inline-block;
+  padding:0.7rem 1.5rem;
+  background:#4f46e5;
+  color:white;
+  border-radius:999px;
+  text-decoration:none;
+}
 
-    /* SECTIONS */
-    section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 4rem 2rem;
-    }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1rem;
+}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
+.grid div {
+  background:#e5e7eb;
+  padding:1rem;
+  border-radius:6px;
+}
 
-    .section-title h2 {
-      font-size: 2.2rem;
-    }
+/* EDITOR */
+.editor input, .editor textarea, .editor select {
+  width:100%;
+  margin-bottom:0.6rem;
+  padding:0.5rem;
+}
 
-    .section-title p {
-      color: var(--gray);
-      margin-top: 0.5rem;
-    }
+.toolbar {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  gap:10px;
+}
 
-    /* FEATURES */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
+.toolbar button {
+  padding:0.7rem 1.3rem;
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+}
 
-    .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      margin-bottom: 0.5rem;
-    }
-
-    /* PRICING */
-    .pricing {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-
-    .price {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 1rem 0;
-    }
-
-    /* CONTACT */
-    .contact form {
-      max-width: 600px;
-      margin: auto;
-      display: grid;
-      gap: 1rem;
-    }
-
-    input, textarea {
-      padding: 0.8rem 1rem;
-      border-radius: 0.5rem;
-      border: 1px solid #cbd5f5;
-      font-size: 1rem;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #4338ca;
-    }
-
-    /* FOOTER */
-    footer {
-      background: var(--dark);
-      color: white;
-      text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-    }
-  </style>
+.export {background:#22c55e;color:white;}
+.save {background:#0ea5e9;color:white;}
+.load {background:#eab308;color:black;}
+.darkToggle {background:#000;color:white;}
+</style>
 </head>
+
 <body>
 
-<header>
-  <div class="nav">
-    <div class="logo">WebStudio</div>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+<div class="sidebar">
+  <h2>SiteForge Pro</h2>
+  <button onclick="addBlock('hero')">➕ Hero</button>
+  <button onclick="addBlock('text')">➕ Text</button>
+  <button onclick="addBlock('button')">➕ Button</button>
+  <button onclick="addBlock('grid')">➕ Grid</button>
+</div>
 
-<section class="hero">
-  <h1>Build Stunning Websites Faster</h1>
-  <p>We craft modern, responsive websites using clean HTML, CSS, and JavaScript.</p>
-  <a href="#pricing" class="btn">Get Started</a>
-</section>
+<div class="canvas">
+  <div class="website" id="website"></div>
+</div>
 
-<section id="features">
-  <div class="section-title">
-    <h2>Features</h2>
-    <p>Everything you need to launch quickly</p>
-  </div>
+<div class="editor">
+  <h3>Style Editor</h3>
+  <textarea id="content"></textarea>
+  <label>Background</label>
+  <input type="color" id="bg">
+  <label>Text Color</label>
+  <input type="color" id="color">
+  <label>Font Size</label>
+  <input type="number" id="size">
+  <label>Padding</label>
+  <input type="number" id="padding">
+</div>
 
-  <div class="features">
-    <div class="card">
-      <h3>⚡ Fast Performance</h3>
-      <p>Optimized code with zero unnecessary dependencies.</p>
-    </div>
-    <div class="card">
-      <h3>📱 Responsive Design</h3>
-      <p>Looks perfect on desktop, tablet, and mobile.</p>
-    </div>
-    <div class="card">
-      <h3>🎨 Modern UI</h3>
-      <p>Clean layouts, smooth animations, and great UX.</p>
-    </div>
-  </div>
-</section>
-
-<section id="pricing">
-  <div class="section-title">
-    <h2>Pricing</h2>
-    <p>Simple and transparent</p>
-  </div>
-
-  <div class="pricing">
-    <div class="card">
-      <h3>Starter</h3>
-      <div class="price">$19</div>
-      <p>Perfect for personal projects</p>
-    </div>
-    <div class="card">
-      <h3>Pro</h3>
-      <div class="price">$49</div>
-      <p>Best for businesses and startups</p>
-    </div>
-    <div class="card">
-      <h3>Enterprise</h3>
-      <div class="price">$99</div>
-      <p>Custom solutions and support</p>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="contact">
-  <div class="section-title">
-    <h2>Contact Us</h2>
-    <p>We’d love to hear from you</p>
-  </div>
-
-  <form onsubmit="handleSubmit(event)">
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Your Email" required />
-    <textarea placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
-
-<footer>
-  <p>© 2025 WebStudio. All rights reserved.</p>
-</footer>
+<div class="toolbar">
+  <button class="save" onclick="save()">💾 Save</button>
+  <button class="load" onclick="load()">📂 Load</button>
+  <button class="export" onclick="exportHTML()">⬇ Export</button>
+  <button class="darkToggle" onclick="toggleDark()">🌙</button>
+</div>
 
 <script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    alert("✅ Message sent successfully!");
-    e.target.reset();
-  }
+let selected=null;
+
+/* BLOCK CREATION */
+function addBlock(type){
+  const b=document.createElement("div");
+  b.className="block "+type;
+  b.draggable=true;
+
+  if(type==="hero") b.innerHTML="<h1>Hero Title</h1><p>Subtitle</p>";
+  if(type==="text") b.innerHTML="<p>Edit this text</p>";
+  if(type==="button") b.innerHTML='<a href="#">Click Me</a>';
+  if(type==="grid") b.innerHTML='<div class="grid"><div>Item</div><div>Item</div><div>Item</div></div>';
+
+  b.onclick=()=>select(b);
+  b.ondragstart=e=>drag=b;
+  b.ondragover=e=>e.preventDefault();
+  b.ondrop=e=>{e.preventDefault();website.insertBefore(drag,b);};
+
+  website.appendChild(b);
+}
+
+/* SELECTION */
+function select(b){
+  if(selected) selected.classList.remove("selected");
+  selected=b;
+  b.classList.add("selected");
+  content.value=b.innerText;
+}
+
+/* EDITING */
+content.oninput=()=>selected&&(selected.innerText=content.value);
+bg.oninput=()=>selected&&(selected.style.background=bg.value);
+color.oninput=()=>selected&&(selected.style.color=color.value);
+size.oninput=()=>selected&&(selected.style.fontSize=size.value+"px");
+padding.oninput=()=>selected&&(selected.style.padding=padding.value+"px");
+
+/* SAVE / LOAD */
+function save(){
+  localStorage.setItem("siteforge",website.innerHTML);
+  alert("Saved ✔️");
+}
+
+function load(){
+  website.innerHTML=localStorage.getItem("siteforge")||"";
+  [...website.children].forEach(b=>{
+    b.onclick=()=>select(b);
+    b.draggable=true;
+  });
+}
+
+/* EXPORT */
+function exportHTML(){
+  const html=`<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Website</title></head><body>${website.innerHTML}</body></html>`;
+  const blob=new Blob([html],{type:"text/html"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="website.html";
+  a.click();
+}
+
+/* DARK MODE */
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
 </script>
 
 </body>

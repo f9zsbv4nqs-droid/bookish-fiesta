@@ -1,246 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SiteForge Pro</title>
+    <meta charset="UTF-8">
+    <title>Gutschein zum 50. Geburtstag</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-:root {
-  --primary:#4f46e5;
-  --bg:#f8fafc;
-  --panel:#ffffff;
-  --text:#0f172a;
-  --border:#e5e7eb;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-body.dark {
-  --bg:#0f172a;
-  --panel:#1e293b;
-  --text:#f8fafc;
-  --border:#334155;
-}
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
 
-* {
-  box-sizing:border-box;
-  font-family:Inter,system-ui,sans-serif;
-}
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: slideUp 1.2s ease-out;
+        }
 
-body {
-  margin:0;
-  display:flex;
-  height:100vh;
-  background:var(--bg);
-  color:var(--text);
-}
+        .image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-/* PANELS */
-.sidebar,.editor {
-  width:260px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  padding:1rem;
-  overflow:auto;
-}
+        .content {
+            padding: 40px;
+            text-align: center;
+        }
 
-.sidebar h2 {
-  color:var(--primary);
-}
+        h1 {
+            font-size: 2.6rem;
+            margin-bottom: 20px;
+        }
 
-.sidebar button,.editor button {
-  width:100%;
-  padding:0.6rem;
-  margin-bottom:0.4rem;
-  border:none;
-  border-radius:6px;
-  background:var(--primary);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-}
+        h2 {
+            font-weight: 300;
+            color: #d0e8ff;
+        }
 
-.sidebar button:hover {opacity:0.9;}
+        input {
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            width: 230px;
+            max-width: 90%;
+            font-size: 1rem;
+            margin-top: 8px;
+        }
 
-.canvas {
-  flex:1;
-  padding:2rem;
-  overflow:auto;
-}
+        button {
+            margin-top: 25px;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            background: #ffd479;
+            color: #1a2a33;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-.website {
-  max-width:1000px;
-  margin:auto;
-  background:white;
-  color:black;
-  box-shadow:0 20px 50px rgba(0,0,0,0.15);
-}
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
 
-/* BLOCKS */
-.block {
-  padding:3rem 2rem;
-  border:2px dashed transparent;
-  cursor:move;
-}
+        .question {
+            margin: 18px 0;
+        }
 
-.block.selected {
-  border-color:var(--primary);
-}
+        .error {
+            color: #ffb3b3;
+            margin-top: 15px;
+            display: none;
+        }
 
-.hero {
-  background:linear-gradient(120deg,#4f46e5,#6366f1);
-  color:white;
-  text-align:center;
-}
+        #voucher {
+            display: none;
+            animation: fadeIn 1.5s ease-in;
+        }
 
-.button a {
-  display:inline-block;
-  padding:0.7rem 1.5rem;
-  background:#4f46e5;
-  color:white;
-  border-radius:999px;
-  text-decoration:none;
-}
+        .voucher-box {
+            border: 2px dashed #ffffffaa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            background: rgba(0,0,0,0.25);
+        }
 
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1rem;
-}
+        .highlight {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffd479;
+        }
 
-.grid div {
-  background:#e5e7eb;
-  padding:1rem;
-  border-radius:6px;
-}
+        .footer {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
 
-/* EDITOR */
-.editor input, .editor textarea, .editor select {
-  width:100%;
-  margin-bottom:0.6rem;
-  padding:0.5rem;
-}
+        /* Konfetti */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            animation: fall 3s linear forwards;
+            z-index: 9999;
+        }
 
-.toolbar {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  display:flex;
-  gap:10px;
-}
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-.toolbar button {
-  padding:0.7rem 1.3rem;
-  border:none;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
-}
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.export {background:#22c55e;color:white;}
-.save {background:#0ea5e9;color:white;}
-.load {background:#eab308;color:black;}
-.darkToggle {background:#000;color:white;}
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="sidebar">
-  <h2>SiteForge Pro</h2>
-  <button onclick="addBlock('hero')">➕ Hero</button>
-  <button onclick="addBlock('text')">➕ Text</button>
-  <button onclick="addBlock('button')">➕ Button</button>
-  <button onclick="addBlock('grid')">➕ Grid</button>
-</div>
+<div class="container">
+    <div class="card">
 
-<div class="canvas">
-  <div class="website" id="website"></div>
-</div>
+        <img src="bild.jpeg" alt="Reise-Gutschein" class="image">
 
-<div class="editor">
-  <h3>Style Editor</h3>
-  <textarea id="content"></textarea>
-  <label>Background</label>
-  <input type="color" id="bg">
-  <label>Text Color</label>
-  <input type="color" id="color">
-  <label>Font Size</label>
-  <input type="number" id="size">
-  <label>Padding</label>
-  <input type="number" id="padding">
-</div>
+        <div class="content">
 
-<div class="toolbar">
-  <button class="save" onclick="save()">💾 Save</button>
-  <button class="load" onclick="load()">📂 Load</button>
-  <button class="export" onclick="exportHTML()">⬇ Export</button>
-  <button class="darkToggle" onclick="toggleDark()">🌙</button>
+            <!-- RÄTSEL -->
+            <div id="riddle">
+                <h1>🧠 Reise-Rätsel</h1>
+                <p>Löse diese 3 kniffligen Hauptstädte,<br>um den Gutschein freizuschalten:</p>
+
+                <div class="question">
+                    🇧🇫 Hauptstadt von Burkina Faso?<br>
+                    <input id="q1">
+                </div>
+
+                <div class="question">
+                    🇧🇳 Hauptstadt von Brunei?<br>
+                    <input id="q2">
+                </div>
+
+                <div class="question">
+                    🇹🇻 Hauptstadt von Tuvalu?<br>
+                    <input id="q3">
+                </div>
+
+                <button onclick="checkAnswers()">Antworten prüfen</button>
+                <div id="error" class="error">❌ Leider nicht ganz – nochmal versuchen!</div>
+            </div>
+
+            <!-- GUTSCHEIN -->
+            <div id="voucher">
+                <h1>🎉 Alles Gute zum 50. Geburtstag! 🎉</h1>
+                <h2>Lieber Papa</h2>
+
+                <div class="voucher-box">
+                    <p>Zu deinem Geburtstag bekommst du von uns:</p>
+
+                    <div class="highlight">
+                        🧳 EINEN NEUEN REISEKOFFER 🧳
+                    </div>
+
+                    <p>
+                        Für viele neue Reisen,<br>
+                        große Abenteuer und unvergessliche Erinnerungen.
+                    </p>
+                </div>
+
+                <button onclick="launchConfetti()">🎁 Gutschein einlösen</button>
+
+                <div class="footer">
+                    Mit ganz viel Liebe 💙<br>
+                    <strong>Jonas, Emilia, Emely und Moritz</strong>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <script>
-let selected=null;
-
-/* BLOCK CREATION */
-function addBlock(type){
-  const b=document.createElement("div");
-  b.className="block "+type;
-  b.draggable=true;
-
-  if(type==="hero") b.innerHTML="<h1>Hero Title</h1><p>Subtitle</p>";
-  if(type==="text") b.innerHTML="<p>Edit this text</p>";
-  if(type==="button") b.innerHTML='<a href="#">Click Me</a>';
-  if(type==="grid") b.innerHTML='<div class="grid"><div>Item</div><div>Item</div><div>Item</div></div>';
-
-  b.onclick=()=>select(b);
-  b.ondragstart=e=>drag=b;
-  b.ondragover=e=>e.preventDefault();
-  b.ondrop=e=>{e.preventDefault();website.insertBefore(drag,b);};
-
-  website.appendChild(b);
+function normalize(text) {
+    return text.toLowerCase().replace(/\s+/g, " ").trim();
 }
 
-/* SELECTION */
-function select(b){
-  if(selected) selected.classList.remove("selected");
-  selected=b;
-  b.classList.add("selected");
-  content.value=b.innerText;
+function checkAnswers() {
+    const q1 = normalize(document.getElementById("q1").value);
+    const q2 = normalize(document.getElementById("q2").value);
+    const q3 = normalize(document.getElementById("q3").value);
+
+    if (
+        q1 === "ouagadougou" &&
+        q2 === "bandar seri begawan" &&
+        q3 === "funafuti"
+    ) {
+        document.getElementById("riddle").style.display = "none";
+        document.getElementById("voucher").style.display = "block";
+    } else {
+        document.getElementById("error").style.display = "block";
+    }
 }
 
-/* EDITING */
-content.oninput=()=>selected&&(selected.innerText=content.value);
-bg.oninput=()=>selected&&(selected.style.background=bg.value);
-color.oninput=()=>selected&&(selected.style.color=color.value);
-size.oninput=()=>selected&&(selected.style.fontSize=size.value+"px");
-padding.oninput=()=>selected&&(selected.style.padding=padding.value+"px");
+function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = 
+            `hsl(${Math.random() * 360}, 80%, 60%)`;
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+        document.body.appendChild(confetti);
 
-/* SAVE / LOAD */
-function save(){
-  localStorage.setItem("siteforge",website.innerHTML);
-  alert("Saved ✔️");
-}
-
-function load(){
-  website.innerHTML=localStorage.getItem("siteforge")||"";
-  [...website.children].forEach(b=>{
-    b.onclick=()=>select(b);
-    b.draggable=true;
-  });
-}
-
-/* EXPORT */
-function exportHTML(){
-  const html=`<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Website</title></head><body>${website.innerHTML}</body></html>`;
-  const blob=new Blob([html],{type:"text/html"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="website.html";
-  a.click();
-}
-
-/* DARK MODE */
-function toggleDark(){
-  document.body.classList.toggle("dark");
+        setTimeout(() => confetti.remove(), 4000);
+    }
 }
 </script>
 
